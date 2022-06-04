@@ -5,7 +5,7 @@
 
 //fontion Utilisateur --
 
-void tabUser_init(User tabUser[], int size) //rend tout les compte non-assigné
+void tabUser_init(User tabUser[], int size) //set all users to unassigned
 {
     for (int i = 0; i < size; i++)
     {
@@ -18,7 +18,7 @@ void tabUser_init(User tabUser[], int size) //rend tout les compte non-assigné
     }
 }
 
-int find_unused_id_U(User tabUser[], int size) //trouver un compte non-assigné
+int find_unused_id_U(User tabUser[], int size) //find an unassigned user
 {
     for (int i = 0; i < size; i++)
     {
@@ -30,7 +30,7 @@ int find_unused_id_U(User tabUser[], int size) //trouver un compte non-assigné
     return -1;
 }
 
-int verif_login(User tabUser[], int tab_length, char user[], char mdp[]) //cherche un compte avec user/mdp
+int verif_login(User tabUser[], int tab_length, char user[], char mdp[]) //finds a user with user/pw
 {
     int id=find_id_U(tabUser, user, tab_length);
     if (id == -1) {
@@ -45,7 +45,7 @@ int verif_login(User tabUser[], int tab_length, char user[], char mdp[]) //cherc
 
 
 
-int createAccount(User tabUser[], int tab_length) // -1 Erreur d'emplacement; 0 annulé; 1 compte créé
+int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled; 1 user created
 {
     int id = find_unused_id_U(tabUser, tab_length);
     int temp;
@@ -56,18 +56,18 @@ int createAccount(User tabUser[], int tab_length) // -1 Erreur d'emplacement; 0 
         printf("Base de donnée surcharchée!\n");
         return -1;
     }
-    // Access de l'utilisateur
+    // Setting access for user :
     do {
         printf("Etes-vous un étudiant ou un professeur? E/P\n");
         scanf("%c",&input_user.access);
-		if(input_user.access == '\n') { // Faire un scanf %c apres un scanf le remplit automatiquement par '\n'
+		if(input_user.access == '\n') { // Doing a scanf %c after a scanf replaces it by '\n'
 			scanf("%c", &input_user.access);
 		}
     } while(input_user.access != 'E' && input_user.access != 'P' && input_user.access != '*');
     if (input_user.access=='*') {
         return 0;
     }
-    // Nom de l'utilisateur
+    // Username :
     do
     {
         printf("Nom d'utilisateur: ");
@@ -81,7 +81,7 @@ int createAccount(User tabUser[], int tab_length) // -1 Erreur d'emplacement; 0 
     if (equal_chaine(input_user.login,"*")) {
         return 0;
     }
-    // MDP de l'utilisateur
+    // User password :
     do
     {
         printf("Veuillez entrer un mot de passe contenant au moins\n8 caractères,  une majuscule, une minuscule et un chiffre :\n");
@@ -89,17 +89,13 @@ int createAccount(User tabUser[], int tab_length) // -1 Erreur d'emplacement; 0 
 		if(validPw(input_user.password) != 0) {
 			printf("Mot de passe trop faible,\n");
 		}
-    } while(0); //while (validPw(input_user.password) == 0);
+    } while (validPw(input_user.password) == 0);
 
     tabUser[id].access = input_user.access;
     chaine_assign(tabUser[id].login, input_user.login, 50);
     chaine_assign(tabUser[id].password, input_user.password, 50);
 	
     return 1;
-//    if(tabUser[id].login[0]=='\0') {//verifie que tabUser est assigné
-//        printf("Error\n");
-//        tabUser[id].login[0]='?';
-//    }
 }
 
 
