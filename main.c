@@ -18,7 +18,7 @@
     #include "file.h"
 #endif
 
-//fonction Page d'affichage --
+//Display functions :
 
 char menu()
 {
@@ -31,7 +31,7 @@ char menu()
         printf("2 - Créer un compte\n");
         printf("3 - Quitter Application\n");
         scanf("%c", &res);
-		if(res == '\n') { // Faire un scanf %c apres un scanf le remplit automatiquement par '\n'
+		if(res == '\n') { // Doing a scanf %c after a scanf replaces it by '\n'
 			scanf("%c", &res);
 		}
     } while (res != '1' && res != '2' && res != '3' && res != '4');
@@ -42,6 +42,7 @@ int login(User tabUser[], int tab_length, char info[])
 {
     char user[50];
     char mdp[50];
+    int max=3;
     int res=-1;
 	
     clear();
@@ -61,6 +62,10 @@ int login(User tabUser[], int tab_length, char info[])
             //clear();
             printf("Application CY-BiblioTECH\n");
             printf("Utilisateur ou mot de passe incorect!\n\n");
+	    max++;
+	    if (max==0){
+		    exit(1);
+	    }
         }
     } while (res == -1 && equal_chaine(user,"*")!=1);
 
@@ -73,7 +78,7 @@ int login(User tabUser[], int tab_length, char info[])
 int deleteAccount(User tabUser[], int user_id, int tab_length) {
     int security;
     do {
-	security = login(tabUser, tab_length,"Retapper votre nom d'utilisateur et votre mot de passe\nsi vous est sûr de vouloir supprimer votre compte\n");
+	security = login(tabUser, tab_length,"Retappez votre nom d'utilisateur et votre mot de passe\nsi vous est sûr de vouloir supprimer votre compte\n");
     } while(security != -1 && security != user_id);
     if(security == -1) {
         return 0;
@@ -86,7 +91,7 @@ int deleteAccount(User tabUser[], int user_id, int tab_length) {
     }
 }
 
-void drawDebug(User tabUser[], int len, Book tabBook[], int lenB) //Affiche les list user et book
+void drawDebug(User tabUser[], int len, Book tabBook[], int lenB) //Displays user and book lists
 {
     clear();
     printf("Login - Password - Access\n--------------------------\n");
@@ -133,7 +138,7 @@ int which_order(Book tabBook[], int id_tab[], int temp_tab_length) {
 	}
 
 }
-int show_book(Book tabBook[], int max_length, int id_tab[]) //renvoie l'id du book selectionner
+int show_book(Book tabBook[], int max_length, int id_tab[]) //returns selected book's id and displays all books
 {
     int j=0;
     int res;
@@ -170,7 +175,7 @@ int show_book(Book tabBook[], int max_length, int id_tab[]) //renvoie l'id du bo
     exit(1);
 }
 
-int show_own_book(User tabUser[], int user_id, Book tabBook[]) //renvoie l'id du book selectionner
+int show_own_book(User tabUser[], int user_id, Book tabBook[]) //returns selected book's id and displays borrowed books
 {
     int j=1;
     int res;
@@ -206,7 +211,7 @@ int show_own_book(User tabUser[], int user_id, Book tabBook[]) //renvoie l'id du
     exit(1);
 }
 
-void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { // fonction Principale connection --
+void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { // Main function while connected --
     char input = '0';
     int id_book;
 	
@@ -226,7 +231,7 @@ void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { //
 		printf("2 - Vos livres empruntés\n");
 		printf("3 - Supprimer votre compte\n");
 		
-		if (tabUser[user_id].access == 'P') { // Affichage Selon Professeur / Etudiant
+		if (tabUser[user_id].access == 'P') { // Different options for Teacher/Student
 			printf("4 - Ajouter un livre\n");
 			printf("5 - Deconnexion\n");
 		} else {
@@ -235,25 +240,25 @@ void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { //
 		
 		// input
         scanf("%c", &input);
-		if(input == '\n') { // Faire un scanf %c apres un scanf le remplit automatiquement par '\n'
+		if(input == '\n') { // Doing a scanf %c after a scanf replaces it by '\n'
 			scanf("%c", &input);
 		}
         switch (input) {
         case '1':
-			if (tabUser[user_id].allow == 1) { // vérifie que l'utilisateur a le droit d'emprunter un livre
-				temp_tab_length = init_tab_id(tabBook, id_tab, tab_length); //créé un tableau d'id des livre existant
-				if(which_order(tabBook, id_tab, temp_tab_length)== 0) { //trie ce tableau
-					id_book = show_book(tabBook, temp_tab_length, id_tab); // recupère l'id du livre à emprunté
+			if (tabUser[user_id].allow == 1) { // Check if the user is allowed to borrow a book
+				temp_tab_length = init_tab_id(tabBook, id_tab, tab_length); //Creates an array with existing book's ids
+				if(which_order(tabBook, id_tab, temp_tab_length)== 0) { //sorts the array
+					id_book = show_book(tabBook, temp_tab_length, id_tab); // gets the id of the book that is going to be borrowed
 					if(id_book!=-1) {
-						borrow_book(tabUser, user_id, tabBook, id_book); // emprunte ce livre
+						borrow_book(tabUser, user_id, tabBook, id_book); // borrows the book
 					}
 				};
 			}
             break;
         case '2':
-			id_book = show_own_book(tabUser, user_id, tabBook); // recupère l'id du livre emprunté
+			id_book = show_own_book(tabUser, user_id, tabBook); // Gets the borrowed book's id
 			if(id_book!=-1) {
-				return_book(tabUser, user_id, tabBook, id_book); // rend le livre emprunté
+				return_book(tabUser, user_id, tabBook, id_book); // changes the book to the return state
 			}
             break;
         case '3':
