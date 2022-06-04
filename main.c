@@ -179,6 +179,7 @@ int show_own_book(User tabUser[], int user_id, Book tabBook[]) //returns selecte
 {
     int j=1;
     int res;
+	int temp_id;
     do
     {
         clear();
@@ -187,8 +188,10 @@ int show_own_book(User tabUser[], int user_id, Book tabBook[]) //returns selecte
         printf("Vouler-vous rendre un livre?\n");
         j=1;
         for(int i=0; i<5; i++) {
-            if(tabUser[user_id].borrowed[i]!=-1) {
-                printf("%d - %s\n",j,tabBook[tabUser[user_id].borrowed[i]].title);
+			temp_id=tabUser[user_id].borrowed[i];
+			
+            if(temp_id!=-1) {
+                printf("%d - %s - %s - %s - %s\n", j, tabBook[temp_id].title, tabBook[temp_id].author, tabBook[temp_id].categorie, ctime(&tabBook[temp_id].time));
                 j++;
             }
         }

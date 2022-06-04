@@ -57,7 +57,7 @@ int createBook(Book tabBook[], int tab_length) {
         return 0;
     }
 	
-	// Categorie du livre
+	// Categorie of book
 	printf("Categorie du livre: ");
     scanf("%s", input_book.categorie);
 	
@@ -81,11 +81,22 @@ void borrow_book(User tabUser[], int user_id, Book tabBook[], int book_id) {
 	} else {
 		tabBook[book_id].owner=user_id;
 		tabUser[user_id].borrowed[i]=book_id;
+		time_t temp_time = time(NULL);
+		struct tm* tm = localtime(&temp_time);
+		tm->tm_min+=2 + (tabUser[user_id].access=='P'); //set hour time to 3min for professors and 2min for students
+		tabBook[book_id].time= mktime(tm);
 		printf("Vous avez maintenant %d livre(s) emprunté(s).\n",i+1);
 	}
 	scanf("%d");
 }
 void return_book(User tabUser[], int user_id, Book tabBook[], int borrow_id) {
+	
+	time_t now = time(NULL);
+    
+    float secondes = difftime(now, tabBook[ tabUser[user_id].borrowed[borrow_id]].time);
+	if( secondes > 0) {
+		tabUser[user_id].allow = 0;
+	}
     tabBook[ tabUser[user_id].borrowed[borrow_id] ].owner=-1;
     tabUser[user_id].borrowed[borrow_id]=-1;
 }
