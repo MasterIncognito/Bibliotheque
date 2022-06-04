@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h> // pour isdigit()
+#include <time.h>
 
 typedef struct
 {
@@ -10,7 +11,7 @@ typedef struct
     char author[100];
     char categorie[100];
     int owner; // emprunter par qui ?
-    int time; // heure d'emprunt
+    time_t time; // heure d'emprunt
 } Book;
 
 typedef struct
