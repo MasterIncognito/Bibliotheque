@@ -3,7 +3,7 @@
     #include "book.h"
 #endif
 
-//fonction Livre --
+//Book functions --
 
 void tabBook_init(Book tabBook[], int size) //rend tout les Livre non-assigné
 {
