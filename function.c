@@ -4,7 +4,7 @@
 #endif
 //sctructure
 
-//fonction Generale --
+//Core functions --
 
 void clear()
 {
@@ -55,7 +55,7 @@ int alphabet_bigger(char chaine1[] ,char chaine2[]) {
 		return 0;
 	}
 }
-int find_id_U(User tabUser[], char user_name[], int tab_length) {//trouve un compte qui match user_name
+int find_id_U(User tabUser[], char user_name[], int tab_length) {//Finds a user matching the username
     for (int i = 0; i < tab_length; i++)
     {
         if (equal_chaine(tabUser[i].login, user_name) == 1) {
@@ -66,7 +66,7 @@ int find_id_U(User tabUser[], char user_name[], int tab_length) {//trouve un com
     return -1;
 }
 
-int find_id_B(Book tabBook[], char book_title[], int tab_length) {//trouve un livre qui match book_title
+int find_id_B(Book tabBook[], char book_title[], int tab_length) {//Finds a book matching the book_title
     for (int i = 0; i < tab_length; i++)
     {
         if (equal_chaine(tabBook[i].title, book_title) == 1) {
@@ -77,7 +77,7 @@ int find_id_B(Book tabBook[], char book_title[], int tab_length) {//trouve un li
     return -1;
 }
 
-int validPw(char pw[]) //Vérifie que le mdp rempli les conditions nécessaires
+int validPw(char pw[]) //Makes sure the password is meeting the requirements
 {
     if (strlen(pw) >= 8)
     {
@@ -106,7 +106,7 @@ int validPw(char pw[]) //Vérifie que le mdp rempli les conditions nécessaires
     return 0;
 }
 
-void fputs_safe(char chaine[], FILE* file) {
+void fputs_safe(char chaine[], FILE* file) {//Function to write to file
     int error=0;
     //printf(chaine);
     error=fputs(chaine,file);
@@ -116,7 +116,7 @@ void fputs_safe(char chaine[], FILE* file) {
 }
 
 
-//fonction Tri
+//Sorting functions
 
 void title_order(Book tabBook[], int tab[], int tab_length) {
 	int min;
