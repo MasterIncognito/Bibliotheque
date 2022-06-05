@@ -11,18 +11,18 @@ void clear()
     system("@cls||clear");
 }
 
-int equal_chaine(char chaine1[], char chaine2[])
+int equal_string(char string1[], char string2[])
 {
     int j = 0;
-    while (j < 50 && chaine1[j] != '\0')
+    while (j < 50 && string1[j] != '\0')
     {
-        if (chaine1[j] != chaine2[j])
+        if (string1[j] != string2[j])
         {
             return 0;
         }
         j++;
     }
-    if (chaine2[j] == '\0')
+    if (string2[j] == '\0')
     {
         return 1;
     }
@@ -31,25 +31,25 @@ int equal_chaine(char chaine1[], char chaine2[])
         return 0;
     }
 }
-void chaine_assign(char chaine1[] ,char chaine2[] ,int len) {
+void string_assign(char string1[] ,char string2[] ,int len) {
     int i=0;
-    while(i<(len-1) && chaine2[i]!='\0') {
-        chaine1[i]=chaine2[i];
+    while(i<(len-1) && string2[i]!='\0') {
+        string1[i]=string2[i];
         i++;
     }
-	chaine1[i]='\0';
+	string1[i]='\0';
 }
-int alphabet_bigger(char chaine1[] ,char chaine2[]) {
+int alphabet_bigger(char string1[] ,char string2[]) {
 	int i=0;
-	while(chaine1[i]!='\0' && chaine2[i]!='\0') {
-		if(chaine1[i]>chaine2[i]) {
+	while(string1[i]!='\0' && string2[i]!='\0') {
+		if(string1[i]>string2[i]) {
 			return 1;
-		} else if(chaine1[i]<chaine2[i]) {
+		} else if(string1[i]<string2[i]) {
 			return 0;
 		}
 		i++;
 	}
-	if(chaine2[i]=='\0') {
+	if(string2[i]=='\0') {
 		return 1;
 	} else {
 		return 0;
@@ -58,7 +58,7 @@ int alphabet_bigger(char chaine1[] ,char chaine2[]) {
 int find_id_U(User tabUser[], char user_name[], int tab_length) {//Finds a user matching the username
     for (int i = 0; i < tab_length; i++)
     {
-        if (equal_chaine(tabUser[i].login, user_name) == 1) {
+        if (equal_string(tabUser[i].login, user_name) == 1) {
             //printf("aaaaa");
             return i;
         }
@@ -69,7 +69,7 @@ int find_id_U(User tabUser[], char user_name[], int tab_length) {//Finds a user 
 int find_id_B(Book tabBook[], char book_title[], int tab_length) {//Finds a book matching the book_title
     for (int i = 0; i < tab_length; i++)
     {
-        if (equal_chaine(tabBook[i].title, book_title) == 1) {
+        if (equal_string(tabBook[i].title, book_title) == 1) {
             //printf("aaaaa");
             return i;
         }
@@ -106,15 +106,14 @@ int validPw(char pw[]) //Makes sure the password is meeting the requirements
     return 0;
 }
 
-void fputs_safe(char chaine[], FILE* file) {//Function to write to file
+void fputs_safe(char string[], FILE* file) {//Function to write to file
     int error=0;
-    //printf(chaine);
-    error=fputs(chaine,file);
+    //printf(string);
+    error=fputs(string,file);
     if(error==-1) {
         printf("ERR0R");
     }
 }
-
 
 //Sorting functions
 

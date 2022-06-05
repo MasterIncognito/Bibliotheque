@@ -46,14 +46,14 @@ int createBook(Book tabBook[], int tab_length) {
             printf("Ce livre existe déjà !\n");
         }
     } while(temp!=-1);
-    if (equal_chaine(input_book.title,"*")) {
+    if (equal_string(input_book.title,"*")) {
         return 0;
     }
 	
 	// Auteur du livre
 	printf("Auteur du livre: ");
     scanf("%s", input_book.author);
-    if (equal_chaine(input_book.author,"*")) {
+    if (equal_string(input_book.author,"*")) {
         return 0;
     }
 	
@@ -63,9 +63,9 @@ int createBook(Book tabBook[], int tab_length) {
 	
 	
 	tabBook[id].id = id;
-	chaine_assign(tabBook[id].title,input_book.title, 50);
-	chaine_assign(tabBook[id].author,input_book.author, 50);
-	chaine_assign(tabBook[id].categorie,input_book.categorie, 50);
+	string_assign(tabBook[id].title,input_book.title, 50);
+	string_assign(tabBook[id].author,input_book.author, 50);
+	string_assign(tabBook[id].categorie,input_book.categorie, 50);
 	
     return 1;
 }

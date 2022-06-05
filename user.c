@@ -36,7 +36,7 @@ int verif_login(User tabUser[], int tab_length, char user[], char mdp[]) //finds
     if (id == -1) {
         return -1;
     }
-    if (equal_chaine(tabUser[id].password, mdp) == 1)
+    if (equal_string(tabUser[id].password, mdp) == 1)
     {
         return id;
     }
@@ -78,7 +78,7 @@ int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled;
         }
     } while(temp!=-1);
 	
-    if (equal_chaine(input_user.login,"*")) {
+    if (equal_string(input_user.login,"*")) {
         return 0;
     }
     // User password :
@@ -98,8 +98,8 @@ int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled;
 		input_user.access = 'P';
 	}
     tabUser[id].access = input_user.access;
-    chaine_assign(tabUser[id].login, input_user.login, 50);
-    chaine_assign(tabUser[id].password, input_user.password, 50);
+    string_assign(tabUser[id].login, input_user.login, 50);
+    string_assign(tabUser[id].password, input_user.password, 50);
 	
     return 1;
 }

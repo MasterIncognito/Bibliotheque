@@ -25,12 +25,12 @@ typedef struct
 
 void clear();
 
-int equal_chaine(char chaine1[], char chaine2[]);
-void chaine_assign(char chaine1[] ,char chaine2[] ,int len);
+int equal_string(char string1[], char string2[]);
+void string_assign(char string1[] ,char string2[] ,int len);
 int find_id_U(User tabUser[], char user_name[], int tab_length);
 int find_id_B(Book tabBook[], char user_name[], int tab_length);
 int validPw(char pw[]);
-void fputs_safe(char chaine[], FILE* file);
+void fputs_safe(char string[], FILE* file);
 char vigenere(char input, int goal, int size); //goal is 0 to code, and 1 to decode.
 
 //tri

@@ -54,7 +54,7 @@ int login(User tabUser[], int tab_length, char info[])
         printf("Nom d'utilisateur: ");
         scanf("%s", user);
         
-        if(equal_chaine(user,"*")!=1) {
+        if(equal_string(user,"*")!=1) {
             printf("Mot de passe: ");
             scanf("%s", mdp);
 			res = verif_login(tabUser, tab_length, user, mdp);
@@ -67,9 +67,9 @@ int login(User tabUser[], int tab_length, char info[])
 		    exit(1);
 	    }
         }
-    } while (res == -1 && equal_chaine(user,"*")!=1);
+    } while (res == -1 && equal_string(user,"*")!=1);
 
-    if(equal_chaine(user,"*")) {
+    if(equal_string(user,"*")) {
         return -1;
     }
     return res;
