@@ -30,9 +30,9 @@ int find_unused_id_U(User userArray[], int size) //find an unassigned user
     return -1;
 }
 
-int verif_login(User userArray[], int tab_length, char user[], char psw[]) //finds a user with user/pw
+int verif_login(User userArray[], int array_length, char user[], char psw[]) //finds a user with user/pw
 {
-    int id=find_id_U(userArray, user, tab_length);
+    int id=find_id_U(userArray, user, array_length);
     if (id == -1) {
         return -1;
     }
@@ -45,9 +45,9 @@ int verif_login(User userArray[], int tab_length, char user[], char psw[]) //fin
 
 
 
-int createAccount(User userArray[], int tab_length) // -1 index error; 0 canceled; 1 user created
+int createAccount(User userArray[], int array_length) // -1 index error; 0 canceled; 1 user created
 {
-    int id = find_unused_id_U(userArray, tab_length);
+    int id = find_unused_id_U(userArray, array_length);
     int temp;
 	User input_user;
 	clear();
@@ -72,7 +72,7 @@ int createAccount(User userArray[], int tab_length) // -1 index error; 0 cancele
     {
         printf("Nom d'utilisateur: ");
         scanf("%s", input_user.login);
-        temp = find_id_U(userArray, input_user.login, tab_length);
+        temp = find_id_U(userArray, input_user.login, array_length);
         if( temp!=-1) {
             printf("Nom d'utilisateur existe déjà !\n");
         }

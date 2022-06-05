@@ -26,8 +26,8 @@ int find_unused_id_B(Book bookArray[], int size) //Finds an unnassigned user
     return -1;
 }
 
-int createBook(Book bookArray[], int tab_length) {
-    int id = find_unused_id_B(bookArray, tab_length);
+int createBook(Book bookArray[], int array_length) {
+    int id = find_unused_id_B(bookArray, array_length);
     int temp;
 	Book input_book;
 	clear();
@@ -41,7 +41,7 @@ int createBook(Book bookArray[], int tab_length) {
 	do {
         printf("Nom du livre: ");
         scanf("%s", input_book.title);
-        temp = find_id_B(bookArray, input_book.title, tab_length);
+        temp = find_id_B(bookArray, input_book.title, array_length);
         if( temp!=-1) {
             printf("Ce livre existe déjà !\n");
         }

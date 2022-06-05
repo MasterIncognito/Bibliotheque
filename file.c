@@ -5,7 +5,7 @@
 
 //File functions --
 
-int import_user(User userArray[], int tab_length,char link[]) {
+int import_user(User userArray[], int array_length,char link[]) {
     FILE * file = NULL;
 
     file = fopen(link, "r");
@@ -18,7 +18,7 @@ int import_user(User userArray[], int tab_length,char link[]) {
         do {
             i++;
         }while(userArray[i].login[0]!='\0');
-		if (i>=tab_length) {
+		if (i>=array_length) {
 			printf("Base de donnée surcharchée!\n");
 			return -1;
 		}
@@ -54,7 +54,7 @@ int import_user(User userArray[], int tab_length,char link[]) {
 	return 1;
 }
 
-int import_book(Book bookArray[], int tab_length,char link[]) {
+int import_book(Book bookArray[], int array_length,char link[]) {
     FILE * file = NULL;
 
     file = fopen(link, "r");
@@ -67,7 +67,7 @@ int import_book(Book bookArray[], int tab_length,char link[]) {
         do{
             i++;
         } while(bookArray[i].id!=-1);
-		if (i>=tab_length) {
+		if (i>=array_length) {
 			printf("Base de donnée surcharchée!\n");
 			return -1;
 		}
@@ -110,12 +110,12 @@ int import_book(Book bookArray[], int tab_length,char link[]) {
 	return 1;
 }
 
-void export_user(User userArray[], int tab_length,char link[]) {
+void export_user(User userArray[], int array_length,char link[]) {
     FILE * file= NULL;
 
     file = fopen(link, "w");
     fputs_safe("Nom | Mot de passe | Etudiant Professeur",file);
-    for(int i=0; i<tab_length; i++) {
+    for(int i=0; i<array_length; i++) {
 
         if(userArray[i].login[0]!='\0') {
             fputs_safe("\n",file);
@@ -130,12 +130,12 @@ void export_user(User userArray[], int tab_length,char link[]) {
     }
     fclose(file);
 }
-void export_book(Book bookArray[], int tab_length,char link[]) {
+void export_book(Book bookArray[], int array_length,char link[]) {
     FILE * file= NULL;
 
     file = fopen(link, "w");
     fputs_safe("Titre | Auteur | Categorie",file);
-    for(int i=0; i<tab_length; i++) {
+    for(int i=0; i<array_length; i++) {
 
         if(bookArray[i].id!=-1) {
             fputs_safe("\n",file);
