@@ -10,7 +10,7 @@ typedef struct
     char title[100];
     char author[100];
     char categorie[100];
-    int owner; // emprunter par qui ?
+    int owner; // Borrowed by whom
     time_t time; // hour to return
 } Book;
 
@@ -20,7 +20,7 @@ typedef struct
     char password[50];
     int borrowed[5];
     int allow;
-    char access;//Etudiant / Professeur
+    char access; //Student / Teacher
 } User;
 
 void clear();
@@ -31,6 +31,7 @@ int find_id_U(User tabUser[], char user_name[], int tab_length);
 int find_id_B(Book tabBook[], char user_name[], int tab_length);
 int validPw(char pw[]);
 void fputs_safe(char chaine[], FILE* file);
+char vigenere(char input, int goal); //goal is 0 to code, and 1 to decode.
 
 //tri
 void title_order(Book tabBook[], int tab[], int tab_length);
