@@ -34,7 +34,7 @@ char menu()
 		if(res == '\n') { // Doing a scanf %c after a scanf replaces it by '\n'
 			scanf("%c", &res);
 		}
-    } while (res != '1' && res != '2' && res != '3' && res != '4');
+    } while (res != '1' && res != '2' && res != '3');
     return res;
 }
 
@@ -266,13 +266,19 @@ void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { //
             break;
         case '3':
             if(deleteAccount(tabUser, user_id,tab_length)==1) {
-                input='4';
+                if(tabUser[user_id].access == 'P') {
+					input='5';
+				} else {
+					input='4';
+				}
+				export_user(tabUser, tab_length, "user.txt");
             };
             break;
 		case '4':
             if(tabUser[user_id].access == 'P') {
                 createBook(tabBook, tab_length);
             };
+			export_book(tabBook, tab_length, "book.txt");
         }
     }
 }
@@ -291,9 +297,9 @@ void main() // fonction Principale --
     //export_book(tabBook, tab_length, "book.txt");
     //export_user(tabUser, tab_length, "user.txt");
     
-    createAccount(tabUser, tab_length);
+    //createAccount(tabUser, tab_length);
     char input = 0;
-    while (input != 3)
+    while (input != '3')
     {
         input = menu();
         switch (input)
@@ -306,14 +312,13 @@ void main() // fonction Principale --
             break;
         case '2':
             createAccount(tabUser, tab_length);
+			export_user(tabUser, tab_length, "user.txt");
             break;
-        case '3':
-            exit(1);
-            break;
-        case '4':
-            drawDebug(tabUser, tab_length, tabBook, tab_length);
-            scanf("%d");
-            break;
+        //case '4': // show every information store
+        //    drawDebug(tabUser, tab_length, tabBook, tab_length);
+        //    scanf("%d");
+        //    break;
         }
     }
+	clear();
 }
