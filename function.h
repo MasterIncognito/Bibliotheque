@@ -31,7 +31,7 @@ int find_id_U(User userArray[], char user_name[], int tab_length);
 int find_id_B(Book bookArray[], char user_name[], int tab_length);
 int validPw(char pw[]);
 void fputs_safe(char string[], FILE* file);
-void vigenere(char input, int goal, int size); //goal is 0 to code, and 1 to decode.
+int vigenere(char input, int goal, int size); //goal is 0 to code, and 1 to decode.
 
 //tri
 void title_order(Book bookArray[], int tab[], int tab_length);
