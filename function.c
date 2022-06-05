@@ -32,11 +32,14 @@ int equal_string(char string1[], char string2[])
     }
 }
 
-void vigenere(char input[], int goal, int size) {	//goal is 0 to code, and 1 to decode.
+int vigenere(char input[], int goal, int size) {	//goal is 0 to code, and 1 to decode.
     char key[14]="cytechlibrary";
     int nb;
     int tracker=0;
     for(int i=0;i<size;i++){
+        if (input[i]=="\0"){
+            return 0;
+        }
         if (islower(input[i])){
             if (goal==0){
                 nb=input[i]-97;
