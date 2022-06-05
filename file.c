@@ -5,20 +5,30 @@
 
 //File functions --
 
-void import_user(User tabUser[], int tab_length,char link[]) {
+int import_user(User tabUser[], int tab_length,char link[]) {
     FILE * file = NULL;
 
     file = fopen(link, "r");
-    int i=find_unused_id_U(tabUser,tab_length);
+    int i=0;
     int j;
     char eof[100];
     int temp=0;
     fgets(eof,100,file);
     while(temp != -1) {
+        do {
+            i++;
+        }while(tabUser[i].login[0]!='\0');
+		if (i>=tab_length) {
+			printf("Base de donnée surcharchée!\n");
+			return -1;
+		}
         //USERNAME
         j=0;
         do {
             temp=fgetc(file);
+			if(temp == -1) {
+				return 0;
+			}
             tabUser[i].login[j]=temp;
             j++;
         } while (temp != '|' && j!=99);
@@ -38,28 +48,36 @@ void import_user(User tabUser[], int tab_length,char link[]) {
         fgetc(file);
         temp=fgetc(file);
         tabUser[i].access=temp;
-        do {
-            i++;
-        }while(tabUser[i].login[0]!='\0');
         temp=fgetc(file);
     }
     fclose(file);
+	return 1;
 }
 
-void import_book(Book tabBook[], int tab_length,char link[]) {
+int import_book(Book tabBook[], int tab_length,char link[]) {
     FILE * file = NULL;
 
     file = fopen(link, "r");
-    int i=find_unused_id_B(tabBook,tab_length);;
+    int i=0;
     int j;
     char eof[100];
     int temp=0;
     fgets(eof,100,file);
     while(temp != -1) {
+        do{
+            i++;
+        } while(tabBook[i].id!=-1);
+		if (i>=tab_length) {
+			printf("Base de donnée surcharchée!\n");
+			return -1;
+		}
         //TITLE
         j=0;
         do {
             temp=fgetc(file);
+			if(temp == -1) {
+				return 0;
+			}
             tabBook[i].title[j]=temp;
             j++;
         } while (temp != '|' && j!=99);
@@ -87,11 +105,9 @@ void import_book(Book tabBook[], int tab_length,char link[]) {
 		
 		//next id
         tabBook[i].id=i;
-        do{
-            i++;
-        } while(tabBook[i].id!=-1);
     }
     fclose(file);
+	return 1;
 }
 
 void export_user(User tabUser[], int tab_length,char link[]) {

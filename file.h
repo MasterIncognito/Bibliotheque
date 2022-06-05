@@ -13,7 +13,7 @@
     #include "book.h"
 #endif
 
-void import_user(User tabUser[], int tab_length,char link[]);
-void import_book(Book tabBook[], int tab_length,char link[]);
+int import_user(User tabUser[], int tab_length,char link[]);
+int import_book(Book tabBook[], int tab_length,char link[]);
 void export_user(User tabUser[], int tab_length,char link[]);
 void export_book(Book tabBook[], int tab_length,char link[]);
