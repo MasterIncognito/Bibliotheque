@@ -98,10 +98,11 @@ void export_user(User tabUser[], int tab_length,char link[]) {
     FILE * file= NULL;
 
     file = fopen(link, "w");
-    fputs_safe("Nom | Mot de passe | Etudiant Professeur\n",file);
+    fputs_safe("Nom | Mot de passe | Etudiant Professeur",file);
     for(int i=0; i<tab_length; i++) {
 
         if(tabUser[i].login[0]!='\0') {
+            fputs_safe("\n",file);
             fputs_safe(tabUser[i].login,file);
             fputs_safe(" | ",file);
             fputs_safe(tabUser[i].password,file);
@@ -109,7 +110,6 @@ void export_user(User tabUser[], int tab_length,char link[]) {
             char temp[2];
             temp[0]=tabUser[i].access;
             fputs_safe(temp,file);
-            fputs_safe("\n",file);
         }
     }
     fclose(file);
@@ -118,17 +118,18 @@ void export_book(Book tabBook[], int tab_length,char link[]) {
     FILE * file= NULL;
 
     file = fopen(link, "w");
-    fputs_safe("Titre | Auteur | Categorie\n",file);
+    fputs_safe("Titre | Auteur | Categorie",file);
     for(int i=0; i<tab_length; i++) {
 
         if(tabBook[i].id!=-1) {
+            fputs_safe("\n",file);
             fputs_safe(tabBook[i].title,file);
             fputs_safe(" | ",file);
             fputs_safe(tabBook[i].author,file);
             fputs_safe(" | ",file);
             fputs_safe(tabBook[i].categorie,file);
-            fputs_safe("\n",file);
         }
     }
+	
     fclose(file);
 }

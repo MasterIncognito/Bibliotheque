@@ -315,10 +315,10 @@ void main() // fonction Principale --
 			export_user(tabUser, tab_length, "user.txt");
             break;
         //case '4': // show every information store
-        //    drawDebug(tabUser, tab_length, tabBook, tab_length);
-        //    scanf("%d");
-        //    break;
+        //    
         }
     }
 	clear();
+	drawDebug(tabUser, tab_length, tabBook, tab_length);
+    scanf("%d");
 }
