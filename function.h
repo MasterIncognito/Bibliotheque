@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h> // pour isdigit()
-#include <time.h>
+#include <ctype.h> // For isdigit()
+#include <time.h> // To track time
 #include <unistd.h>
 typedef struct
 {
