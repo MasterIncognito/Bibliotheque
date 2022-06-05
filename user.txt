@@ -1,9 +1,11 @@
 Nom | Mot de passe | Etudiant Professeur
-e | cyxvvg7U | E
-pierre | r3rrRrrr | E
-Frodon | m0nPrecieux | E
-Harry  | tuEstUnS0rcier | E
-ayayayya | 0Oooooo | P
-zlzllzlzl | 0Oooooo | P
-TTTT | ee3eeEee | E
-p | p | P
+Pythagore | -580Mpdmetxgm | E
+Turing | 1912JwkcyuMhfpjkof | E
+Euclide | -300Andrepkdqf | E
+Newton | 1642Iuytg | E
+Gauss | 1777Ousbshm | P
+Cauchy | 1789LqtcwFthykpas | P
+Euler | 1707Pctf | E
+Descartes | 1596Jqyvlkt | E
+Poincar‚ | 1854Eohfi-Lgvy | P
+Schwartz | 1915Aprxpol | P

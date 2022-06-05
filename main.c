@@ -152,10 +152,10 @@ int show_book(Book bookArray[], int max_length, int id_array[]) //returns select
         for(int i=0;i<max_length;i++) {
             //printf("%d",bookArray[i].id);
             if(bookArray[id_array[i]].owner==-1) {
-                printf("%d - %s\n",j,bookArray[id_array[i]].title);
+                printf("%d - %s - %s - %s\n", j,bookArray[id_array[i]].title, bookArray[id_array[i]].author, bookArray[id_array[i]].categorie);
                 j++;
             } else {
-                printf("* - %s\n",bookArray[id_array[i]].title);
+                printf("* - %s - %s - %s\n", bookArray[id_array[i]].title, bookArray[id_array[i]].author, bookArray[id_array[i]].categorie);
             }
         }
         scanf("%d",&res);
