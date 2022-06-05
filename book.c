@@ -5,7 +5,7 @@
 
 //Book functions --
 
-void tabBook_init(Book tabBook[], int size) //rend tout les Livre non-assigné
+void tabBook_init(Book tabBook[], int size) //Sets all books to unassigned
 {
     for (int i = 0; i < size; i++)
     {
@@ -14,7 +14,7 @@ void tabBook_init(Book tabBook[], int size) //rend tout les Livre non-assigné
     }
 }
 
-int find_unused_id_B(Book tabBook[], int size) //trouver un compte non-assigné
+int find_unused_id_B(Book tabBook[], int size) //Finds an unnassigned user
 {
     for (int i = 0; i < size; i++)
     {
