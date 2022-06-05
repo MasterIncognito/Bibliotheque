@@ -62,7 +62,7 @@ int login(User tabUser[], int tab_length, char info[])
             //clear();
             printf("Application CY-BiblioTECH\n");
             printf("Utilisateur ou mot de passe incorect!\n\n");
-	    max++;
+	    max--;
 	    if (max==0){
 		    exit(1);
 	    }
