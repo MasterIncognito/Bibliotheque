@@ -57,6 +57,7 @@ int login(User userArray[], int array_length, char info[])
         if(equal_string(user,"*")!=1) {
             printf("Mot de passe: ");
             scanf("%s", psw);
+			vigenere(psw,0,50);
 			res = verif_login(userArray, array_length, user, psw);
 
             //clear();
@@ -314,10 +315,8 @@ void main() // fonction Principale --
             createAccount(userArray, array_length);
 			export_user(userArray, array_length, "user.txt");
             break;
-        //case '4': // show every information store
-        //    
         }
     }
 	clear();
-	//drawDebug(userArray, array_length, bookArray, array_length);
+	//drawDebug(userArray, array_length, bookArray, array_length); // show every information store
 }

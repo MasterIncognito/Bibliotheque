@@ -99,6 +99,7 @@ int createAccount(User userArray[], int array_length) // -1 index error; 0 cance
 	}
     userArray[id].access = input_user.access;
     string_assign(userArray[id].login, input_user.login, 50);
+	vigenere(input_user.password,0,50);
     string_assign(userArray[id].password, input_user.password, 50);
 	
     return 1;
