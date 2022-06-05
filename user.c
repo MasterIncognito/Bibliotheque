@@ -92,10 +92,10 @@ int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled;
     } while (validPw(input_user.password) == 0);
 	
 	if(input_user.access == 'e') {
-		input_user.access = 'E'
+		input_user.access = 'E';
 	}
 	if(input_user.access == 'p') {
-		input_user.access = 'P'
+		input_user.access = 'P';
 	}
     tabUser[id].access = input_user.access;
     chaine_assign(tabUser[id].login, input_user.login, 50);

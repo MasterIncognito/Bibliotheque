@@ -319,6 +319,5 @@ void main() // fonction Principale --
         }
     }
 	clear();
-	drawDebug(tabUser, tab_length, tabBook, tab_length);
-    scanf("%d");
+	//drawDebug(tabUser, tab_length, tabBook, tab_length);
 }
