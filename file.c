@@ -3,7 +3,7 @@
     #include "file.h"
 #endif
 
-//fonction Fichier --
+//File functions --
 
 void import_user(User tabUser[], int tab_length,char link[]) {
     FILE * file = NULL;
@@ -15,7 +15,7 @@ void import_user(User tabUser[], int tab_length,char link[]) {
     int temp=0;
     fgets(eof,100,file);
     while(temp != -1) {
-        //NOM
+        //USERNAME
         j=0;
         do {
             temp=fgetc(file);
@@ -24,7 +24,7 @@ void import_user(User tabUser[], int tab_length,char link[]) {
         } while (temp != '|' && j!=99);
         tabUser[i].login[j-2]='\0';
 
-        //MDP
+        //PASSWORD
         fgetc(file);
         j=0;
         do {
@@ -75,7 +75,7 @@ void import_book(Book tabBook[], int tab_length,char link[]) {
         } while (temp != '|' && j!=99);
         tabBook[i].author[j-2]='\0';
 
-        //categorie
+        //CATEGORY
         fgetc(file);
         j=0;
         do {
