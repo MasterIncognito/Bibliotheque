@@ -31,6 +31,34 @@ int equal_string(char string1[], char string2[])
         return 0;
     }
 }
+
+void vigenere(char input[], int goal, int size) {	//goal is 0 to code, and 1 to decode.
+    char key[13]="cytechlibrary";
+    int nb;
+    int tracker=0;
+    for(int i=0;i<size;i++){
+        if (islower(input[i])){
+            if (goal==0){
+                nb=input[i]-97;
+                nb+=key[tracker]-97;
+                input[i]=nb%25+97;
+                tracker+=1;
+            }else {
+                nb=input[i]-97;
+                nb-=key[tracker]-97;
+                if (nb<0){
+                    nb+=25;
+                }
+                input[i]=nb+97;
+                tracker+=1;
+            }
+            if (tracker==13){
+                tracker=0;
+            }
+        }
+    }
+}
+
 void string_assign(char string1[] ,char string2[] ,int len) {
     int i=0;
     while(i<(len-1) && string2[i]!='\0') {
