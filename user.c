@@ -63,7 +63,7 @@ int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled;
 		if(input_user.access == '\n') { // Doing a scanf %c after a scanf replaces it by '\n'
 			scanf("%c", &input_user.access);
 		}
-    } while(input_user.access != 'E' && input_user.access != 'P' && input_user.access != '*');
+    } while(input_user.access != 'E' && input_user.access != 'P' && input_user.access != '*' && input_user.access != 'e' && input_user.access != 'p');
     if (input_user.access=='*') {
         return 0;
     }
@@ -90,7 +90,13 @@ int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled;
 			printf("Mot de passe trop faible,\n");
 		}
     } while (validPw(input_user.password) == 0);
-
+	
+	if(input_user.access == 'e') {
+		input_user.access = 'E'
+	}
+	if(input_user.access == 'p') {
+		input_user.access = 'P'
+	}
     tabUser[id].access = input_user.access;
     chaine_assign(tabUser[id].login, input_user.login, 50);
     chaine_assign(tabUser[id].password, input_user.password, 50);
