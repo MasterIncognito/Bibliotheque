@@ -5,20 +5,20 @@
 
 //Book functions --
 
-void tabBook_init(Book tabBook[], int size) //Sets all books to unassigned
+void bookArray_init(Book bookArray[], int size) //Sets all books to unassigned
 {
     for (int i = 0; i < size; i++)
     {
-        tabBook[i].id = -1;
-        tabBook[i].owner = -1;
+        bookArray[i].id = -1;
+        bookArray[i].owner = -1;
     }
 }
 
-int find_unused_id_B(Book tabBook[], int size) //Finds an unnassigned user
+int find_unused_id_B(Book bookArray[], int size) //Finds an unnassigned user
 {
     for (int i = 0; i < size; i++)
     {
-        if (tabBook[i].id==-1)
+        if (bookArray[i].id==-1)
         {
             return i;
         }
@@ -26,8 +26,8 @@ int find_unused_id_B(Book tabBook[], int size) //Finds an unnassigned user
     return -1;
 }
 
-int createBook(Book tabBook[], int tab_length) {
-    int id = find_unused_id_B(tabBook, tab_length);
+int createBook(Book bookArray[], int tab_length) {
+    int id = find_unused_id_B(bookArray, tab_length);
     int temp;
 	Book input_book;
 	clear();
@@ -41,7 +41,7 @@ int createBook(Book tabBook[], int tab_length) {
 	do {
         printf("Nom du livre: ");
         scanf("%s", input_book.title);
-        temp = find_id_B(tabBook, input_book.title, tab_length);
+        temp = find_id_B(bookArray, input_book.title, tab_length);
         if( temp!=-1) {
             printf("Ce livre existe déjà !\n");
         }
@@ -62,41 +62,41 @@ int createBook(Book tabBook[], int tab_length) {
     scanf("%s", input_book.categorie);
 	
 	
-	tabBook[id].id = id;
-	string_assign(tabBook[id].title,input_book.title, 50);
-	string_assign(tabBook[id].author,input_book.author, 50);
-	string_assign(tabBook[id].categorie,input_book.categorie, 50);
+	bookArray[id].id = id;
+	string_assign(bookArray[id].title,input_book.title, 50);
+	string_assign(bookArray[id].author,input_book.author, 50);
+	string_assign(bookArray[id].categorie,input_book.categorie, 50);
 	
     return 1;
 }
 
 
-void borrow_book(User tabUser[], int user_id, Book tabBook[], int book_id) {
+void borrow_book(User userArray[], int user_id, Book bookArray[], int book_id) {
     int i=0;
-    while(tabUser[user_id].borrowed[i]!=-1) {
+    while(userArray[user_id].borrowed[i]!=-1) {
         i++;
     }
-	if((i>=5)&&(tabUser[user_id].access=='P') || (i>=3)&&(tabUser[user_id].access=='E')) {
+	if((i>=5)&&(userArray[user_id].access=='P') || (i>=3)&&(userArray[user_id].access=='E')) {
 		printf("Vous avez déjà %d livre(s) emprunté(s)!\n",i);
 	} else {
-		tabBook[book_id].owner=user_id;
-		tabUser[user_id].borrowed[i]=book_id;
+		bookArray[book_id].owner=user_id;
+		userArray[user_id].borrowed[i]=book_id;
 		time_t temp_time = time(NULL);
 		struct tm* tm = localtime(&temp_time);
-		tm->tm_min+=2 + (tabUser[user_id].access=='P'); //set hour time to 3min for professors and 2min for students
-		tabBook[book_id].time= mktime(tm);
+		tm->tm_min+=2 + (userArray[user_id].access=='P'); //set hour time to 3min for professors and 2min for students
+		bookArray[book_id].time= mktime(tm);
 		printf("Vous avez maintenant %d livre(s) emprunté(s).\n",i+1);
 	}
 	scanf("%d");
 }
-void return_book(User tabUser[], int user_id, Book tabBook[], int borrow_id) {
+void return_book(User userArray[], int user_id, Book bookArray[], int borrow_id) {
 	
 	time_t now = time(NULL);
     
-    float secondes = difftime(now, tabBook[ tabUser[user_id].borrowed[borrow_id]].time);
+    float secondes = difftime(now, bookArray[ userArray[user_id].borrowed[borrow_id]].time);
 	if( secondes > 0) {
-		tabUser[user_id].allow = 0;
+		userArray[user_id].allow = 0;
 	}
-    tabBook[ tabUser[user_id].borrowed[borrow_id] ].owner=-1;
-    tabUser[user_id].borrowed[borrow_id]=-1;
+    bookArray[ userArray[user_id].borrowed[borrow_id] ].owner=-1;
+    userArray[user_id].borrowed[borrow_id]=-1;
 }

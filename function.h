@@ -27,14 +27,14 @@ void clear();
 
 int equal_string(char string1[], char string2[]);
 void string_assign(char string1[] ,char string2[] ,int len);
-int find_id_U(User tabUser[], char user_name[], int tab_length);
-int find_id_B(Book tabBook[], char user_name[], int tab_length);
+int find_id_U(User userArray[], char user_name[], int tab_length);
+int find_id_B(Book bookArray[], char user_name[], int tab_length);
 int validPw(char pw[]);
 void fputs_safe(char string[], FILE* file);
 char vigenere(char input, int goal, int size); //goal is 0 to code, and 1 to decode.
 
 //tri
-void title_order(Book tabBook[], int tab[], int tab_length);
-void author_order(Book tabBook[], int tab[], int tab_length);
-void categorie_order(Book tabBook[], int tab[], int tab_length);
-int init_tab_id(Book tabBook[], int tab[], int tab_length);
+void title_order(Book bookArray[], int tab[], int tab_length);
+void author_order(Book bookArray[], int tab[], int tab_length);
+void categorie_order(Book bookArray[], int tab[], int tab_length);
+int init_tab_id(Book bookArray[], int tab[], int tab_length);

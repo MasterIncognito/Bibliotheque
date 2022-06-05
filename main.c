@@ -38,10 +38,10 @@ char menu()
     return res;
 }
 
-int login(User tabUser[], int tab_length, char info[])
+int login(User userArray[], int tab_length, char info[])
 {
     char user[50];
-    char mdp[50];
+    char psw[50];
     int max=3;
     int res=-1;
 	
@@ -56,8 +56,8 @@ int login(User tabUser[], int tab_length, char info[])
         
         if(equal_string(user,"*")!=1) {
             printf("Mot de passe: ");
-            scanf("%s", mdp);
-			res = verif_login(tabUser, tab_length, user, mdp);
+            scanf("%s", psw);
+			res = verif_login(userArray, tab_length, user, psw);
 
             //clear();
             printf("Application CY-BiblioTECH\n");
@@ -75,42 +75,42 @@ int login(User tabUser[], int tab_length, char info[])
     return res;
 }
 
-int deleteAccount(User tabUser[], int user_id, int tab_length) {
+int deleteAccount(User userArray[], int user_id, int tab_length) {
     int security;
     do {
-	security = login(tabUser, tab_length,"Retappez votre nom d'utilisateur et votre mot de passe\nsi vous est sûr de vouloir supprimer votre compte\n");
+	security = login(userArray, tab_length,"Retappez votre nom d'utilisateur et votre mot de passe\nsi vous est sûr de vouloir supprimer votre compte\n");
     } while(security != -1 && security != user_id);
     if(security == -1) {
         return 0;
     }
     else
     {
-        tabUser[user_id].login[0]='\0';
-        //tabUser[user_id].password="";
+        userArray[user_id].login[0]='\0';
+        //userArray[user_id].password="";
         return 1;
     }
 }
 
-void drawDebug(User tabUser[], int len, Book tabBook[], int lenB) //Displays user and book lists
+void drawDebug(User userArray[], int len, Book bookArray[], int lenB) //Displays user and book lists
 {
     clear();
     printf("Login - Password - Access\n--------------------------\n");
     for (int i = 0; i < len; i++)
     {
-        if(tabUser[i].login[0]!='\0') {
-            printf("%s - %s - %c\n", tabUser[i].login, tabUser[i].password, tabUser[i].access);
+        if(userArray[i].login[0]!='\0') {
+            printf("%s - %s - %c\n", userArray[i].login, userArray[i].password, userArray[i].access);
         }
     }
     printf("\nTitle - Author - Categorie\n--------------------------\n");
     for (int i = 0; i < len; i++)
     {
-        if(tabBook[i].id!=-1) {
-            printf("%s - %s - %s\n", tabBook[i].title, tabBook[i].author, tabBook[i].categorie);
+        if(bookArray[i].id!=-1) {
+            printf("%s - %s - %s\n", bookArray[i].title, bookArray[i].author, bookArray[i].categorie);
         }
     }
 }
 
-int which_order(Book tabBook[], int id_tab[], int temp_tab_length) {
+int which_order(Book bookArray[], int id_tab[], int temp_tab_length) {
     int res;
 	do {
 		clear();
@@ -127,18 +127,18 @@ int which_order(Book tabBook[], int id_tab[], int temp_tab_length) {
 		case 0:
 			return -1;
 		case 1:
-			title_order(tabBook, id_tab, temp_tab_length);
+			title_order(bookArray, id_tab, temp_tab_length);
 			return 0;
 		case 2:
-			author_order(tabBook, id_tab, temp_tab_length);
+			author_order(bookArray, id_tab, temp_tab_length);
 			return 0;
 		case 3:
-			categorie_order(tabBook, id_tab, temp_tab_length);
+			categorie_order(bookArray, id_tab, temp_tab_length);
 			return 0;
 	}
 
 }
-int show_book(Book tabBook[], int max_length, int id_tab[]) //returns selected book's id and displays all books
+int show_book(Book bookArray[], int max_length, int id_tab[]) //returns selected book's id and displays all books
 {
     int j=0;
     int res;
@@ -149,12 +149,12 @@ int show_book(Book tabBook[], int max_length, int id_tab[]) //returns selected b
         printf("Les Livres * ne sont pas disponible.\n");
         j=1;
         for(int i=0;i<max_length;i++) {
-            //printf("%d",tabBook[i].id);
-            if(tabBook[id_tab[i]].owner==-1) {
-                printf("%d - %s\n",j,tabBook[id_tab[i]].title);
+            //printf("%d",bookArray[i].id);
+            if(bookArray[id_tab[i]].owner==-1) {
+                printf("%d - %s\n",j,bookArray[id_tab[i]].title);
                 j++;
             } else {
-                printf("* - %s\n",tabBook[id_tab[i]].title);
+                printf("* - %s\n",bookArray[id_tab[i]].title);
             }
         }
         scanf("%d",&res);
@@ -164,7 +164,7 @@ int show_book(Book tabBook[], int max_length, int id_tab[]) //returns selected b
     }
     j=1;
     for(int i=0;i<max_length;i++) {
-        if(tabBook[id_tab[i]].owner==-1) {
+        if(bookArray[id_tab[i]].owner==-1) {
             if(j==res) {
                 return id_tab[i];
             }
@@ -175,7 +175,7 @@ int show_book(Book tabBook[], int max_length, int id_tab[]) //returns selected b
     exit(1);
 }
 
-int show_own_book(User tabUser[], int user_id, Book tabBook[]) //returns selected book's id and displays borrowed books
+int show_own_book(User userArray[], int user_id, Book bookArray[]) //returns selected book's id and displays borrowed books
 {
     int j=1;
     int res;
@@ -188,10 +188,10 @@ int show_own_book(User tabUser[], int user_id, Book tabBook[]) //returns selecte
         printf("Vouler-vous rendre un livre?\n");
         j=1;
         for(int i=0; i<5; i++) {
-			temp_id=tabUser[user_id].borrowed[i];
+			temp_id=userArray[user_id].borrowed[i];
 			
             if(temp_id!=-1) {
-                printf("%d - %s - %s - %s - %s\n", j, tabBook[temp_id].title, tabBook[temp_id].author, tabBook[temp_id].categorie, ctime(&tabBook[temp_id].time));
+                printf("%d - %s - %s - %s - %s\n", j, bookArray[temp_id].title, bookArray[temp_id].author, bookArray[temp_id].categorie, ctime(&bookArray[temp_id].time));
                 j++;
             }
         }
@@ -203,7 +203,7 @@ int show_own_book(User tabUser[], int user_id, Book tabBook[]) //returns selecte
     }
     j=1;
     for(int i=0;i<5;i++) {
-        if(tabUser[user_id].borrowed[i]!=-1) {
+        if(userArray[user_id].borrowed[i]!=-1) {
             if(j==res) {
                 return i;
             }
@@ -214,19 +214,19 @@ int show_own_book(User tabUser[], int user_id, Book tabBook[]) //returns selecte
     exit(1);
 }
 
-void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { // Main function while connected --
+void main_User(User userArray[], int user_id, int tab_length, Book bookArray[]) { // Main function while connected --
     char input = '0';
     int id_book;
 	
 	int id_tab[tab_length];
 	int temp_tab_length;
-    while ((input != '4')&&(tabUser[user_id].access == 'E') ||  (input != '5')&&(tabUser[user_id].access == 'P'))
+    while ((input != '4')&&(userArray[user_id].access == 'E') ||  (input != '5')&&(userArray[user_id].access == 'P'))
     {
         clear();
         printf("Application CY-BiblioTECH\n");
-        printf("Bonjour %s,\n", tabUser[user_id].login);
+        printf("Bonjour %s,\n", userArray[user_id].login);
 		
-		if (tabUser[user_id].allow == 0) { // vérifie que l'utilisateur a le droit d'emprunter un livre
+		if (userArray[user_id].allow == 0) { // vérifie que l'utilisateur a le droit d'emprunter un livre
 			printf("Vous n'avez pas le droit d'emprunter un livre car vous avez rendu un livre en retard.\n\n* - Emprunter un livre\n");
 		} else {
 			printf("\n1 - Emprunter un livre\n");
@@ -234,7 +234,7 @@ void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { //
 		printf("2 - Vos livres empruntés\n");
 		printf("3 - Supprimer votre compte\n");
 		
-		if (tabUser[user_id].access == 'P') { // Different options for Teacher/Student
+		if (userArray[user_id].access == 'P') { // Different options for Teacher/Student
 			printf("4 - Ajouter un livre\n");
 			printf("5 - Deconnexion\n");
 		} else {
@@ -248,37 +248,37 @@ void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { //
 		}
         switch (input) {
         case '1':
-			if (tabUser[user_id].allow == 1) { // Check if the user is allowed to borrow a book
-				temp_tab_length = init_tab_id(tabBook, id_tab, tab_length); //Creates an array with existing book's ids
-				if(which_order(tabBook, id_tab, temp_tab_length)== 0) { //sorts the array
-					id_book = show_book(tabBook, temp_tab_length, id_tab); // gets the id of the book that is going to be borrowed
+			if (userArray[user_id].allow == 1) { // Check if the user is allowed to borrow a book
+				temp_tab_length = init_tab_id(bookArray, id_tab, tab_length); //Creates an array with existing book's ids
+				if(which_order(bookArray, id_tab, temp_tab_length)== 0) { //sorts the array
+					id_book = show_book(bookArray, temp_tab_length, id_tab); // gets the id of the book that is going to be borrowed
 					if(id_book!=-1) {
-						borrow_book(tabUser, user_id, tabBook, id_book); // borrows the book
+						borrow_book(userArray, user_id, bookArray, id_book); // borrows the book
 					}
 				};
 			}
             break;
         case '2':
-			id_book = show_own_book(tabUser, user_id, tabBook); // Gets the borrowed book's id
+			id_book = show_own_book(userArray, user_id, bookArray); // Gets the borrowed book's id
 			if(id_book!=-1) {
-				return_book(tabUser, user_id, tabBook, id_book); // changes the book to the return state
+				return_book(userArray, user_id, bookArray, id_book); // changes the book to the return state
 			}
             break;
         case '3':
-            if(deleteAccount(tabUser, user_id,tab_length)==1) {
-                if(tabUser[user_id].access == 'P') {
+            if(deleteAccount(userArray, user_id,tab_length)==1) {
+                if(userArray[user_id].access == 'P') {
 					input='5';
 				} else {
 					input='4';
 				}
-				export_user(tabUser, tab_length, "user.txt");
+				export_user(userArray, tab_length, "user.txt");
             };
             break;
 		case '4':
-            if(tabUser[user_id].access == 'P') {
-                createBook(tabBook, tab_length);
+            if(userArray[user_id].access == 'P') {
+                createBook(bookArray, tab_length);
             };
-			export_book(tabBook, tab_length, "book.txt");
+			export_book(bookArray, tab_length, "book.txt");
         }
     }
 }
@@ -286,18 +286,18 @@ void main_User(User tabUser[], int user_id, int tab_length, Book tabBook[]) { //
 void main() // fonction Principale --
 {
     int tab_length = 50;
-    User tabUser[tab_length];
-    Book tabBook[tab_length];
-    tabUser_init(tabUser, tab_length);
-    tabBook_init(tabBook, tab_length);
-    import_book(tabBook,50,"book.txt");
-    import_user(tabUser,50,"user.txt");
+    User userArray[tab_length];
+    Book bookArray[tab_length];
+    userArray_init(userArray, tab_length);
+    bookArray_init(bookArray, tab_length);
+    import_book(bookArray,50,"book.txt");
+    import_user(userArray,50,"user.txt");
     int user_id;
 
-    //export_book(tabBook, tab_length, "book.txt");
-    //export_user(tabUser, tab_length, "user.txt");
+    //export_book(bookArray, tab_length, "book.txt");
+    //export_user(userArray, tab_length, "user.txt");
     
-    //createAccount(tabUser, tab_length);
+    //createAccount(userArray, tab_length);
     char input = 0;
     while (input != '3')
     {
@@ -305,19 +305,19 @@ void main() // fonction Principale --
         switch (input)
         {
         case '1':
-            user_id = login(tabUser, tab_length,"-- Connection --\n");
+            user_id = login(userArray, tab_length,"-- Connection --\n");
             if(user_id > -1) {
-                main_User(tabUser, user_id, tab_length,tabBook);
+                main_User(userArray, user_id, tab_length,bookArray);
             }
             break;
         case '2':
-            createAccount(tabUser, tab_length);
-			export_user(tabUser, tab_length, "user.txt");
+            createAccount(userArray, tab_length);
+			export_user(userArray, tab_length, "user.txt");
             break;
         //case '4': // show every information store
         //    
         }
     }
 	clear();
-	//drawDebug(tabUser, tab_length, tabBook, tab_length);
+	//drawDebug(userArray, tab_length, bookArray, tab_length);
 }

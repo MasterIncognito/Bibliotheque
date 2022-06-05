@@ -5,24 +5,24 @@
 
 //fontion Utilisateur --
 
-void tabUser_init(User tabUser[], int size) //set all users to unassigned
+void userArray_init(User userArray[], int size) //set all users to unassigned
 {
     for (int i = 0; i < size; i++)
     {
         for (int j = 0; j < 5; j++)
         {
-            tabUser[i].borrowed[j] = -1;
+            userArray[i].borrowed[j] = -1;
         }
-        tabUser[i].allow = 1;
-        tabUser[i].login[0]='\0';
+        userArray[i].allow = 1;
+        userArray[i].login[0]='\0';
     }
 }
 
-int find_unused_id_U(User tabUser[], int size) //find an unassigned user
+int find_unused_id_U(User userArray[], int size) //find an unassigned user
 {
     for (int i = 0; i < size; i++)
     {
-        if (tabUser[i].login[0]=='\0')
+        if (userArray[i].login[0]=='\0')
         {
             return i;
         }
@@ -30,13 +30,13 @@ int find_unused_id_U(User tabUser[], int size) //find an unassigned user
     return -1;
 }
 
-int verif_login(User tabUser[], int tab_length, char user[], char mdp[]) //finds a user with user/pw
+int verif_login(User userArray[], int tab_length, char user[], char psw[]) //finds a user with user/pw
 {
-    int id=find_id_U(tabUser, user, tab_length);
+    int id=find_id_U(userArray, user, tab_length);
     if (id == -1) {
         return -1;
     }
-    if (equal_string(tabUser[id].password, mdp) == 1)
+    if (equal_string(userArray[id].password, psw) == 1)
     {
         return id;
     }
@@ -45,9 +45,9 @@ int verif_login(User tabUser[], int tab_length, char user[], char mdp[]) //finds
 
 
 
-int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled; 1 user created
+int createAccount(User userArray[], int tab_length) // -1 index error; 0 canceled; 1 user created
 {
-    int id = find_unused_id_U(tabUser, tab_length);
+    int id = find_unused_id_U(userArray, tab_length);
     int temp;
 	User input_user;
 	clear();
@@ -72,7 +72,7 @@ int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled;
     {
         printf("Nom d'utilisateur: ");
         scanf("%s", input_user.login);
-        temp = find_id_U(tabUser, input_user.login, tab_length);
+        temp = find_id_U(userArray, input_user.login, tab_length);
         if( temp!=-1) {
             printf("Nom d'utilisateur existe déjà !\n");
         }
@@ -97,9 +97,9 @@ int createAccount(User tabUser[], int tab_length) // -1 index error; 0 canceled;
 	if(input_user.access == 'p') {
 		input_user.access = 'P';
 	}
-    tabUser[id].access = input_user.access;
-    string_assign(tabUser[id].login, input_user.login, 50);
-    string_assign(tabUser[id].password, input_user.password, 50);
+    userArray[id].access = input_user.access;
+    string_assign(userArray[id].login, input_user.login, 50);
+    string_assign(userArray[id].password, input_user.password, 50);
 	
     return 1;
 }

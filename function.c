@@ -66,10 +66,10 @@ int find_id_U(User tabUser[], char user_name[], int tab_length) {//Finds a user 
     return -1;
 }
 
-int find_id_B(Book tabBook[], char book_title[], int tab_length) {//Finds a book matching the book_title
+int find_id_B(Book bookArray[], char book_title[], int tab_length) {//Finds a book matching the book_title
     for (int i = 0; i < tab_length; i++)
     {
-        if (equal_string(tabBook[i].title, book_title) == 1) {
+        if (equal_string(bookArray[i].title, book_title) == 1) {
             //printf("aaaaa");
             return i;
         }
@@ -117,13 +117,13 @@ void fputs_safe(char string[], FILE* file) {//Function to write to file
 
 //Sorting functions
 
-void title_order(Book tabBook[], int tab[], int tab_length) {
+void title_order(Book bookArray[], int tab[], int tab_length) {
 	int min;
 	int temp;
 	for(int i=0; i<tab_length; i++) {
 		min=i;
 		for(int j=i+1; j<tab_length; j++) {
-			if(alphabet_bigger(tabBook[tab[min]].title,tabBook[tab[j]].title)) {
+			if(alphabet_bigger(bookArray[tab[min]].title,bookArray[tab[j]].title)) {
 				min=j;
 			}
 		}
@@ -132,13 +132,13 @@ void title_order(Book tabBook[], int tab[], int tab_length) {
 		tab[min]=temp;
 	}
 }
-void author_order(Book tabBook[], int tab[], int tab_length) {
+void author_order(Book bookArray[], int tab[], int tab_length) {
 	int min;
 	int temp;
 	for(int i=0; i<tab_length; i++) {
 		min=i;
 		for(int j=i+1; j<tab_length; j++) {
-			if(alphabet_bigger(tabBook[tab[min]].author,tabBook[tab[j]].author)) {
+			if(alphabet_bigger(bookArray[tab[min]].author,bookArray[tab[j]].author)) {
 				min=j;
 			}
 		}
@@ -147,13 +147,13 @@ void author_order(Book tabBook[], int tab[], int tab_length) {
 		tab[min]=temp;
 	}
 }
-void categorie_order(Book tabBook[], int tab[], int tab_length) {
+void categorie_order(Book bookArray[], int tab[], int tab_length) {
 	int min;
 	int temp;
 	for(int i=0; i<tab_length; i++) {
 		min=i;
 		for(int j=i+1; j<tab_length; j++) {
-			if(alphabet_bigger(tabBook[tab[min]].categorie,tabBook[tab[j]].categorie)) {
+			if(alphabet_bigger(bookArray[tab[min]].categorie,bookArray[tab[j]].categorie)) {
 				min=j;
 			}
 		}
@@ -163,11 +163,11 @@ void categorie_order(Book tabBook[], int tab[], int tab_length) {
 	}
 }
 
-int init_tab_id(Book tabBook[], int tab[], int tab_length) {//créé un tableau des id de book utilisé et renvoie sa vraie taille
+int init_tab_id(Book bookArray[], int tab[], int tab_length) {//créé un tableau des id de book utilisé et renvoie sa vraie taille
 	int j=0;
 	int res;
 	for(int i=0;i<tab_length; i++) {
-		if(tabBook[i].id!=-1) {
+		if(bookArray[i].id!=-1) {
 			tab[j]=i;
 			j++;
 		}

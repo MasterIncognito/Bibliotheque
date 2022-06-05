@@ -3,7 +3,7 @@
     #include "function.h"
 #endif
 
-void tabUser_init(User tabUser[], int size);
-int find_unused_id_U(User tabUser[], int size);
-int verif_login(User tabUser[], int tab_length, char user[], char mdp[]);
-int createAccount(User tabUser[], int tab_length);
+void userArray_init(User userArray[], int size);
+int find_unused_id_U(User userArray[], int size);
+int verif_login(User userArray[], int tab_length, char user[], char psw[]);
+int createAccount(User userArray[], int tab_length);
