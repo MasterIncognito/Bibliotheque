@@ -1,4 +1,4 @@
-all: exec
+all: Bibliotheque
 
 main.o: main.c function.h file.h user.h book.h
 	gcc -c $< -o $@
@@ -15,5 +15,5 @@ user.o: user.c user.h
 book.o: book.c book.h
 	gcc -c $< -o $@
 
-exec: main.o function.o file.o user.o book.o
+Bibliotheque: main.o function.o file.o user.o book.o
 	gcc $^ -o $@
